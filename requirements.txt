@@ -3,6 +3,8 @@ uvicorn==0.22.0
 
 psycopg2==2.9.9
 python-dotenv
+pydantic==2.5.2
 pydantic-settings==2.1.0
+pydantic_core==2.14.5
 alembic
 PyYAML==6.0.1
