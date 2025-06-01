@@ -1,3 +1,6 @@
+from functools import lru_cache
+from typing import Union
+
 from fastapi import FastAPI, Depends
 from fastapi.responses import PlainTextResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -14,10 +17,10 @@ app = FastAPI()
 app.include_router(todos.router)
 
 
-origins = [
-    "http://localhost:3000",
-    "https://todo-frontend-khaki.vercel.app/",
-]
+#origins = [
+#    "http://localhost:3000",
+#    "https://todo-frontend-khaki.vercel.app/",
+#]
 
 # CORS configuration, needed for frontend development
 app.add_middleware(
@@ -27,6 +30,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # global http exception handler, to handle errors
 @app.exception_handler(StarletteHTTPException)
@@ -50,7 +54,6 @@ def read_root(settings: config.Settings = Depends(get_settings)):
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
-
 
 
 
