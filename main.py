@@ -59,13 +59,14 @@ app.add_middleware(
 #     print("Entrando a read_root")  # Log en consola
 #     return {"message": "Hello World"}
 
-# @app.get("/todos")
-# def get_todos():
-#     return db.query(Todo).all()
+@app.get("/todos")
+def get_todos():
+     return db.query(Todo).all()
 
-# @app.get("/todos")
-# def get_todos():
-#     return [
-#         {"id": 1, "name": "Tarea de ejemplo", "completed": False},
-#         {"id": 2, "name": "Otra tarea", "completed": True}
-#     ]
+@app.get("/todos")
+def get_todos():
+     return [
+         {"id": 1, "name": "Tarea de ejemplo", "completed": False},
+         {"id": 2, "name": "Otra tarea", "completed": True}
+     ]
+
