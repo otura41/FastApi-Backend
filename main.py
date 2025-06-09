@@ -57,6 +57,8 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 
 
+
+
 # from fastapi import FastAPI
 # from fastapi.middleware.cors import CORSMiddleware
 # # from routers import todos  # Descomenta esta línea cuando tengas el archivo routers/todos.py
