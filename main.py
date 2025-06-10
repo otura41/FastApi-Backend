@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends
 from fastapi.responses import PlainTextResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from functools import lru_cache
 
 # routers: comment out next line till create them
 from routers import todos
