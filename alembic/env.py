@@ -103,6 +103,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from database import Base
+target_metadata = Base.metadata
+
 # # Escapa la contraseña para la URL
 # # password = urllib.parse.quote(os.environ['DATABASE_PASSWORD'])
 # db_url = f"postgresql://{os.environ['DATABASE_USER']}:{password}@{os.environ['DATABASE_HOST']}:{os.environ['DATABASE_PORT']}/{os.environ['DATABASE_NAME']}"
@@ -111,7 +114,7 @@ load_dotenv()
 # if context.config.config_file_name is not None:
 #     fileConfig(context.config.config_file_name)
 
-# target_metadata = None
+target_metadata = None
 
 # def run_migrations_offline() -> None:
 #     context.configure(
