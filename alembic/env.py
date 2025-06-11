@@ -114,7 +114,7 @@ target_metadata = Base.metadata
 # if context.config.config_file_name is not None:
 #     fileConfig(context.config.config_file_name)
 
-# target_metadata = None
+target_metadata = None
 
 # def run_migrations_offline() -> None:
 #     context.configure(
@@ -157,7 +157,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+# target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
