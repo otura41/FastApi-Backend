@@ -84,10 +84,10 @@ summarize_prompt = PromptTemplate(
 )
 summarize_chain = summarize_prompt | langchain_llm
 
-# Prompt para poema
+# Prompt para poema (corto y en el mismo idioma que el texto)
 write_poem_template_string = """
-    Write a short poem with the following text:
-    {text}
+Write a short poem (no more than 4 lines) using the following text. The poem must be in the same language as the input text:
+{text}
 """
 write_poem_prompt = PromptTemplate(
     template=write_poem_template_string,
