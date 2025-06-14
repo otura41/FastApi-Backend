@@ -48,6 +48,8 @@
 #     if res is None:
 #         raise HTTPException(status_code=404, detail="to do not found")
 
+# 
+
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -71,23 +73,40 @@ def get_db():
 # --- LANGCHAIN INTEGRACIÓN (NUEVA SINTAXIS) ---
 langchain_llm = OpenAI(temperature=0)
 
+# Prompt para resumen
 summarize_template_string = """
     Provide a summary for the following text:
     {text}
 """
-
 summarize_prompt = PromptTemplate(
     template=summarize_template_string,
     input_variables=['text'],
 )
-
-# Nueva forma recomendada: encadenar prompt y modelo
 summarize_chain = summarize_prompt | langchain_llm
+
+# Prompt para poema
+write_poem_template_string = """
+    Write a short poem with the following text:
+    {text}
+"""
+write_poem_prompt = PromptTemplate(
+    template=write_poem_template_string,
+    input_variables=['text'],
+)
+write_poem_chain = write_poem_prompt | langchain_llm
 
 @router.post('/summarize-text')
 async def summarize_text(text: str):
     summary = summarize_chain.invoke({"text": text})
     return {'summary': summary}
+
+@router.post("/write-poem/{id}")
+async def write_poem(id: int, db: Session = Depends(get_db)):
+    todo = crud.read_todo(db, id)
+    if todo is None:
+        raise HTTPException(status_code=404, detail="to do not found")
+    poem = write_poem_chain.invoke({"text": todo.name})
+    return {'poem': poem}
 # --- FIN LANGCHAIN ---
 
 @router.post("", status_code=status.HTTP_201_CREATED)
